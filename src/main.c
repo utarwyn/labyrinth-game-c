@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <string.h>
 
-#include "labyrinthe.h"
+#include "joueur.h"
 #include "main.h"
 #include "utils.h"
 
@@ -23,10 +23,12 @@ int main () {
         printf("####################################");
 
         printf("\n  Action: ");
-        scanf("%d", &choix);
-        printf("\n");
 
-        assert(choix >= 1 && choix <= 4);
+        choix = 0;
+        scanf("%d", &choix);
+        getchar();
+
+        printf("\n");
 
         executer_action_menu(choix);
     } while (choix != 4);
@@ -121,11 +123,9 @@ labyrinthe charger_fichier_labyrinthe () {
 void jouer_labyrinthe () {
     if (laby.largeur > 0) {
         
-        int joueur_lig;
-        int joueur_col;
+        joueur joueur;
 
-        joueur_lig = 1;
-        joueur_col = 0;
+        preparer_joueur(&joueur, laby);
 
         do {
 
@@ -134,36 +134,9 @@ void jouer_labyrinthe () {
             char dir;
             scanf(" %c", &dir);
 
-            switch (dir) {
-                case 'q':
-                    if (joueur_col > 0 && laby.tableau[joueur_lig][joueur_col - 1] != MUR) {
-                        inverser(&laby.tableau[joueur_lig][joueur_col], &laby.tableau[joueur_lig][joueur_col - 1]);
-                        joueur_col--;
-                    }
-                    break;
-                case 'z':
-                    if (laby.tableau[joueur_lig - 1][joueur_col] != MUR) {
-                        inverser(&laby.tableau[joueur_lig][joueur_col], &laby.tableau[joueur_lig - 1][joueur_col]);
-                        joueur_lig--;
-                    }
-                    break;
-                case 'd':
-                    if (joueur_col < laby.largeur - 1 && laby.tableau[joueur_lig][joueur_col + 1] != MUR) {
-                        inverser(&laby.tableau[joueur_lig][joueur_col], &laby.tableau[joueur_lig][joueur_col + 1]);
-                        joueur_col++;
-                    }
-                    break;
-                case 's':
-                    if (laby.tableau[joueur_lig + 1][joueur_col] != MUR) {
-                        inverser(&laby.tableau[joueur_lig][joueur_col], &laby.tableau[joueur_lig + 1][joueur_col]);
-                        joueur_lig++;
-                    }
-                    break;
-            }
+            deplacer_joueur(&joueur, laby, dir);
 
-        } while (joueur_lig != laby.hauteur - 2 || joueur_col != laby.largeur - 1);
-
-        inverser(&laby.tableau[joueur_lig][joueur_col], &laby.tableau[1][0]);
+        } while (joueur_est_arrive(joueur, laby) != 1);
 
     } else {
         printf("   > Aucun labyrinthe n'a été chargé. Annulation.\n");

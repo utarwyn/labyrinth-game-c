@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <dirent.h>
-#include <assert.h>
-#include <sys/stat.h>
-
 #include "labyrinthe.h"
-#include "utils.h"
 
 void creer_structure_labyrinthe (labyrinthe laby) {
     int lig;

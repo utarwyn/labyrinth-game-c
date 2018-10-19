@@ -1,7 +1,18 @@
+#include <stdio.h>
+#include <dirent.h>
+#include <assert.h>
+#include <sys/stat.h>
+
+#include "utils.h"
 
 #define MUR -1
 #define JOUEUR -2
 #define DEBUG_CASES 0
+
+#define DEPART_LIG 1
+#define DEPART_COL 0
+#define ARRIVEE_LIG -2
+#define ARRIVEE_COL -1
 
 #define CHEMIN_LABYS "labys/"
 
