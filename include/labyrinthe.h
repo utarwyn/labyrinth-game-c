@@ -7,12 +7,18 @@
 
 #define MUR -1
 #define JOUEUR -2
+#define TRESOR -3
+#define PIEGE -4
+
 #define DEBUG_CASES 0
 
 #define DEPART_LIG 1
 #define DEPART_COL 0
 #define ARRIVEE_LIG -2
 #define ARRIVEE_COL -1
+
+#define CHANCE_MALUS .02
+#define CHANCE_BONUS .03
 
 #define CHEMIN_LABYS "labys/"
 
@@ -50,6 +56,8 @@ void creer_structure_labyrinthe (labyrinthe laby);
  * @param laby Labyrinthe déjà préparé et structuré
  **/
 void generer_labyrinthe_aleatoire (labyrinthe laby);
+
+void generer_bonus_malus (labyrinthe laby);
 
 /**
  * Remplace la valeur d'une section (plusieurs cases)

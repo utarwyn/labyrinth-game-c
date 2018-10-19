@@ -68,6 +68,14 @@ void generer_labyrinthe_aleatoire (labyrinthe laby) {
     tableau[laby.hauteur - 2][laby.largeur - 1] = 0;
 }
 
+void generer_bonus_malus (labyrinthe laby) {
+    int nb_cases_vides = ((laby.largeur - 1) * (laby.hauteur -1)) / 2 - 1;
+    int nb_bonus = nb_cases_vides * CHANCE_BONUS;
+    int nb_malus = nb_cases_vides * CHANCE_MALUS;
+
+    printf("bonus: %d, malus: %d", nb_bonus, nb_malus);
+}
+
 void remplacer_valeur_recursif (int ** tableau, int ligne, int colonne, int valeur, int valeur_a_remplacer) {
     tableau[ligne][colonne] = valeur_a_remplacer;
 

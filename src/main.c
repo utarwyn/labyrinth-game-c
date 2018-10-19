@@ -66,6 +66,7 @@ labyrinthe creer_labyrinthe () {
     
             creer_structure_labyrinthe(laby);
             generer_labyrinthe_aleatoire(laby);
+            generer_bonus_malus(laby);
             sauvegarder_labyrinthe(laby);
 
             printf("\n  > Labyrinthe généré avec succès dans %s.cfg\n", laby.nom);
