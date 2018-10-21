@@ -18,12 +18,11 @@
 #define CHANCE_PIEGE .03
 #define CHANCE_TRESOR .04
 
-#define SCORE_TRESOR +5
-#define SCORE_PIEGE -4
+#define SCORE_TRESOR -5
+#define SCORE_PIEGE +4
 #define SCORE_DEPLACEMENT +1
 
 #define CHEMIN_LABYS "labys/"
-
 
 /**
  * Structure représentant un labyrinthe.

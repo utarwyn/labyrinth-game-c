@@ -48,7 +48,7 @@ void generer_labyrinthe_aleatoire (labyrinthe laby) {
                 case2 = tableau[ligne][colonne + 1];
             }
 
-            // Les deux cases doivent être libres, mais dans des sections différentes.
+            /* Les deux cases doivent être libres, mais dans des sections différentes. */
             if (case1 != MUR && case2 != MUR && case1 != case2) {
                 if (vertical) {
                     tableau[ligne][colonne] = tableau[ligne + 1][colonne];
@@ -63,7 +63,7 @@ void generer_labyrinthe_aleatoire (labyrinthe laby) {
         }
     }
 
-    // Création de l'entrée et de la sortie du labyrinthe
+    /* Création de l'entrée et de la sortie du labyrinthe */
     tableau[1][0] = JOUEUR;
     tableau[laby.hauteur - 2][laby.largeur - 1] = 0;
 }
@@ -79,7 +79,7 @@ void generer_bonus_malus (labyrinthe laby) {
         ligne = nombre_aleatoire(1, laby.hauteur - 2);
         colonne = nombre_aleatoire(1, laby.largeur - 2);
 
-        if (laby.tableau[ligne][colonne] > 0) { // Est une case libre
+        if (laby.tableau[ligne][colonne] > 0) { /* Est une case libre */
             if (nb_tresors > 0) {
                 laby.tableau[ligne][colonne] = TRESOR;
                 nb_tresors--;
@@ -109,7 +109,7 @@ void remplacer_valeur_recursif (int ** tableau, int ligne, int colonne, int vale
 }
 
 void sauvegarder_labyrinthe (labyrinthe laby) {
-    // Si le dossier qui doit contenir les labyrinthes n'existe pas, on le créé.
+    /* Si le dossier qui doit contenir les labyrinthes n'existe pas, on le créé. */
     if (opendir(CHEMIN_LABYS) == NULL) {
         assert(mkdir(CHEMIN_LABYS, 0700) == 0);
     }
@@ -117,11 +117,11 @@ void sauvegarder_labyrinthe (labyrinthe laby) {
     FILE *fichier;
     fichier = fopen(concatener(CHEMIN_LABYS, concatener(laby.nom, ".cfg")), "wb");
 
-    // Ecriture de la largeur et de la hauteur du labyrinthe
+    /* Ecriture de la largeur et de la hauteur du labyrinthe */
     fwrite(&laby.largeur, sizeof(int), 1, fichier);
     fwrite(&laby.hauteur, sizeof(int), 1, fichier);
 
-    // Ecriture des cases du labyrinthe dans le fichier
+    /* Ecriture des cases du labyrinthe dans le fichier */
     int lig, col;
     char element;
 
@@ -162,6 +162,7 @@ labyrinthe charger_labyrinthe (char * nom) {
     int lig, col;
     char element;
 
+    strcpy(laby.nom, nom);
     laby.tableau = creer_tableau_2d(laby.largeur, laby.hauteur);
 
     for (lig = 0; lig < laby.hauteur; lig++) {

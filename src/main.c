@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <string.h>
 
-#include "joueur.h"
+#include "classement.h"
 #include "main.h"
 #include "utils.h"
 
@@ -96,7 +96,7 @@ labyrinthe charger_fichier_labyrinthe () {
         printf("  Labyinthes disponibles :\n");
         
         while ((dir = readdir(d)) != NULL) {
-            if (dir->d_type == DT_REG) {
+            if (strstr(dir->d_name, ".cfg") != NULL) {
                 printf("    - %s\n", dir->d_name);
             }
         }
@@ -125,6 +125,7 @@ void jouer_labyrinthe () {
     if (laby.largeur > 0) {
         
         joueur joueur;
+        classement classement;
 
         preparer_joueur(&joueur, laby);
 
@@ -140,7 +141,26 @@ void jouer_labyrinthe () {
 
         } while (joueur_est_arrive(joueur, laby) != 1);
 
-        printf("\nScore final: %d\n", joueur.score);
+        afficher_labyrinthe(laby);
+
+        /* Gestion des scores après la partie. */
+        classement = charger_classement(laby);
+        int place_joueur = recuperer_place_joueur(classement, joueur);
+
+        if (place_joueur > -1) {
+            char * nom_joueur;
+            printf("Bravo, vous êtes à la place %d avec %dpts !\n", place_joueur + 1, joueur.score);
+            printf("Nom pour sauvegarder le score : ");
+            scanf("%ms", &nom_joueur);
+            strcpy(joueur.nom, nom_joueur);
+
+            definir_place_joueur(&classement, joueur, place_joueur);
+            afficher_classement(classement);
+            sauvegarder_classement(classement);
+        } else {
+            afficher_classement(classement);
+            printf("Votre score: %d\n", joueur.score);
+        }
 
     } else {
         printf("   > Aucun labyrinthe n'a été chargé. Annulation.\n");

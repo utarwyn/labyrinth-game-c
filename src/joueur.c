@@ -26,6 +26,14 @@ void deplacer_joueur (joueur * joueur, labyrinthe laby, char direction) {
         int * case_dest = &laby.tableau[joueur->ligne + dep_lig][joueur->colonne + dep_col];
 
         if (*case_dest != MUR) {
+            if (*case_dest == TRESOR) {
+                joueur->score += SCORE_TRESOR;
+                *case_dest = 0;
+            } else if (*case_dest == PIEGE) {
+                joueur->score += SCORE_PIEGE;
+                *case_dest = 0;
+            }
+
             inverser(case_courante, case_dest);
 
             joueur->score += SCORE_DEPLACEMENT;
