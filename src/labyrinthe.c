@@ -70,10 +70,25 @@ void generer_labyrinthe_aleatoire (labyrinthe laby) {
 
 void generer_bonus_malus (labyrinthe laby) {
     int nb_cases_vides = ((laby.largeur - 1) * (laby.hauteur -1)) / 2 - 1;
-    int nb_bonus = nb_cases_vides * CHANCE_BONUS;
-    int nb_malus = nb_cases_vides * CHANCE_MALUS;
+    int nb_tresors = nb_cases_vides * CHANCE_TRESOR;
+    int nb_pieges = nb_cases_vides * CHANCE_PIEGE;
 
-    printf("bonus: %d, malus: %d", nb_bonus, nb_malus);
+    int ligne, colonne;
+
+    while (nb_tresors > 0 || nb_pieges > 0) {
+        ligne = nombre_aleatoire(1, laby.hauteur - 2);
+        colonne = nombre_aleatoire(1, laby.largeur - 2);
+
+        if (laby.tableau[ligne][colonne] > 0) { // Est une case libre
+            if (nb_tresors > 0) {
+                laby.tableau[ligne][colonne] = TRESOR;
+                nb_tresors--;
+            } else {
+                laby.tableau[ligne][colonne] = PIEGE;
+                nb_pieges--;
+            }
+        }
+    }
 }
 
 void remplacer_valeur_recursif (int ** tableau, int ligne, int colonne, int valeur, int valeur_a_remplacer) {
@@ -116,7 +131,7 @@ void sauvegarder_labyrinthe (labyrinthe laby) {
 
             /* Si l'élément est une case vide avec une valeur, on la met à zéro
                pour éviter les dépassements de type (ici char).                */
-            if (element != MUR && element != JOUEUR) {
+            if (element > 0) {
                 element = 0;
             }
 
@@ -176,12 +191,14 @@ void afficher_labyrinthe (labyrinthe laby) {
                 case JOUEUR:
                     c = 'o';
                     break;
+                case TRESOR:
+                    c = '+';
+                    break;
+                case PIEGE:
+                    c = '-';
+                    break;
                 default:
-                    if (!DEBUG_CASES) {
-                        c = ' ';
-                    } else {
-                        c = (laby.tableau[lig][col] - 1 + 'A');                        
-                    }
+                    c = ' ';
                     break;
             }
 

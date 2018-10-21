@@ -7,37 +7,31 @@ void preparer_joueur (joueur * joueur, labyrinthe laby) {
 
     joueur->ligne = DEPART_LIG;
     joueur->colonne = DEPART_COL;
+    joueur->score = 0;
 }
 
 void deplacer_joueur (joueur * joueur, labyrinthe laby, char direction) {
-    int ligne = joueur->ligne;
-    int colonne = joueur->colonne;
+    char dep_lig;
+    char dep_col;
 
     switch (direction) {
-        case 'q':
-            if (colonne > 0 && laby.tableau[ligne][colonne - 1] != MUR) {
-                inverser(&laby.tableau[ligne][colonne], &laby.tableau[ligne][colonne - 1]);
-                joueur->colonne--;
-            }
-            break;
-        case 'z':
-            if (laby.tableau[ligne - 1][colonne] != MUR) {
-                inverser(&laby.tableau[ligne][colonne], &laby.tableau[ligne - 1][colonne]);
-                joueur->ligne--;
-            }
-            break;
-        case 'd':
-            if (colonne < laby.largeur - 1 && laby.tableau[ligne][colonne + 1] != MUR) {
-                inverser(&laby.tableau[ligne][colonne], &laby.tableau[ligne][colonne + 1]);
-                joueur->colonne++;
-            }
-            break;
-        case 's':
-            if (laby.tableau[ligne + 1][colonne] != MUR) {
-                inverser(&laby.tableau[ligne][colonne], &laby.tableau[ligne + 1][colonne]);
-                joueur->ligne++;
-            }
-            break;
+        case 'q': dep_col = -1; break;
+        case 'z': dep_lig = -1; break;
+        case 'd': dep_col =  1; break;
+        case 's': dep_lig =  1; break;
+    }
+
+    if ((dep_lig != 0 || dep_col != 0) && joueur->colonne + dep_col >= 0) {
+        int * case_courante = &laby.tableau[joueur->ligne][joueur->colonne];
+        int * case_dest = &laby.tableau[joueur->ligne + dep_lig][joueur->colonne + dep_col];
+
+        if (*case_dest != MUR) {
+            inverser(case_courante, case_dest);
+
+            joueur->score += SCORE_DEPLACEMENT;
+            joueur->colonne += dep_col;
+            joueur->ligne += dep_lig;
+        }
     }
 }
 

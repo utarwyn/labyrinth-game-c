@@ -5,6 +5,7 @@ typedef struct {
 
     int ligne;
     int colonne;
+    int score;
     char nom[50];
 
 } joueur ;

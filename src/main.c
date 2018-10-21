@@ -131,6 +131,7 @@ void jouer_labyrinthe () {
         do {
 
             afficher_labyrinthe(laby);
+            printf("score: %d\n", joueur.score);
 
             char dir;
             scanf(" %c", &dir);
@@ -138,6 +139,8 @@ void jouer_labyrinthe () {
             deplacer_joueur(&joueur, laby, dir);
 
         } while (joueur_est_arrive(joueur, laby) != 1);
+
+        printf("\nScore final: %d\n", joueur.score);
 
     } else {
         printf("   > Aucun labyrinthe n'a été chargé. Annulation.\n");

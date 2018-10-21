@@ -10,15 +10,17 @@
 #define TRESOR -3
 #define PIEGE -4
 
-#define DEBUG_CASES 0
-
 #define DEPART_LIG 1
 #define DEPART_COL 0
 #define ARRIVEE_LIG -2
 #define ARRIVEE_COL -1
 
-#define CHANCE_MALUS .02
-#define CHANCE_BONUS .03
+#define CHANCE_PIEGE .03
+#define CHANCE_TRESOR .04
+
+#define SCORE_TRESOR +5
+#define SCORE_PIEGE -4
+#define SCORE_DEPLACEMENT +1
 
 #define CHEMIN_LABYS "labys/"
 

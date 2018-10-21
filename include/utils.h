@@ -1,4 +1,9 @@
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+
 /**
  * Créer un tableau à deux dimensions qui possède
  * une largeur et une hauteur dynamique.

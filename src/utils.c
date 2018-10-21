@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-
 #include "utils.h"
 
 int ** creer_tableau_2d (int largeur, int hauteur) {
