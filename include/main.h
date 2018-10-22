@@ -1,4 +1,12 @@
 
+#include <stdio.h>
+#include <dirent.h>
+#include <assert.h>
+#include <string.h>
+
+#include "classement.h"
+#include "utils.h"
+
 /**
  * Vérifie et lance l'action désirée par l'utilisateur,
  * après affichage du menu. Cette méthode lance donc les méthodes
