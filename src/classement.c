@@ -62,6 +62,17 @@ int comparer_joueur_classement(void const *a, void const *b) {
     return ja->score == 0 ? 1 : (jb->score == 0 ? -1 : ja->score - jb->score);
 }
 
+void initialiser_classement (classement * cls) {
+    int i;
+    
+    cls->nombre = 0;
+
+    for (i = 0; i < CLASSEMENT_NOMBRE; i++) {
+        strcpy(cls->meilleurs[i].nom, "");
+        cls->meilleurs[i].score = 0;
+    }
+}
+
 classement charger_classement (labyrinthe laby) {
     classement cls;
     cls.laby = laby;
@@ -78,17 +89,6 @@ classement charger_classement (labyrinthe laby) {
     }
 
     return cls; 
-}
-
-void initialiser_classement (classement * cls) {
-    int i;
-    
-    cls->nombre = 0;
-
-    for (i = 0; i < CLASSEMENT_NOMBRE; i++) {
-        strcpy(cls->meilleurs[i].nom, "");
-        cls->meilleurs[i].score = 0;
-    }
 }
 
 void sauvegarder_classement (classement cls) {

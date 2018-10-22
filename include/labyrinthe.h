@@ -15,8 +15,8 @@
 #define ARRIVEE_LIG -2
 #define ARRIVEE_COL -1
 
-#define CHANCE_PIEGE .04
-#define CHANCE_TRESOR .06
+#define CHANCE_PIEGE .03
+#define CHANCE_TRESOR .05
 
 #define SCORE_TRESOR -5
 #define SCORE_PIEGE +4
@@ -58,6 +58,12 @@ void creer_structure_labyrinthe (labyrinthe laby);
  **/
 void generer_labyrinthe_aleatoire (labyrinthe laby);
 
+/**
+ * Genère des bonus et des malus aléatoirement dans un labyrinthe.
+ * Se base sur les constantes prédéfinies en haut du fichier.
+ * 
+ * @param laby Labyrinthe où générer les bonus/malus.
+ **/
 void generer_bonus_malus (labyrinthe laby);
 
 /**

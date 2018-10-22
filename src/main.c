@@ -151,6 +151,11 @@ void jouer_labyrinthe () {
             char nom_joueur[50];
             printf("Bravo, vous êtes à la place %d avec %dpts !\n", place_joueur + 1, joueur.score);
             printf("Nom pour sauvegarder le score : ");
+            
+            /* On nettoie l'entrée de l'utilisateur pour éviter tout bug. */
+            int c;
+            while ( (c = getchar()) != '\n' && c != EOF ) { }
+
             scanf("%s", nom_joueur);
             strcpy(joueur.nom, nom_joueur);
 
