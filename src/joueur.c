@@ -1,8 +1,8 @@
 #include "joueur.h"
 
 void preparer_joueur (joueur * joueur, labyrinthe laby) {
-    if (joueur_est_arrive(*joueur, laby)) {
-        inverser(&laby.tableau[joueur->ligne][joueur->colonne], &laby.tableau[DEPART_LIG][DEPART_COL]);
+    if (laby.tableau[laby.hauteur + ARRIVEE_LIG][laby.largeur + ARRIVEE_COL] == JOUEUR) {
+        inverser(&laby.tableau[ARRIVEE_LIG][ARRIVEE_COL], &laby.tableau[DEPART_LIG][DEPART_COL]);
     }
 
     joueur->ligne = DEPART_LIG;

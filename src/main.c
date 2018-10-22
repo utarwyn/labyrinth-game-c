@@ -167,6 +167,9 @@ void jouer_labyrinthe () {
             printf("Votre score: %d\n", joueur.score);
         }
 
+        /* Rechargement du labyrinthe en cours */
+        laby = charger_labyrinthe(laby.nom);
+
     } else {
         printf("   > Aucun labyrinthe n'a été chargé. Annulation.\n");
     }
