@@ -22,11 +22,15 @@ void afficher_classement (classement cls) {
 int recuperer_place_joueur (classement cls, joueur joueur) {
     int place;
     int i;
+    int cls_score;
 
     place = cls.nombre;
 
+    /* Recherche de la possible place du joueur */
     for (i = 0; i < cls.nombre && place == cls.nombre; i++) {
-        if (cls.meilleurs[i].score >= joueur.score) {
+        cls_score = cls.meilleurs[i].score;
+
+        if (cls_score == 0 || cls_score > joueur.score) {
             place = i;
         }
     }
@@ -39,18 +43,23 @@ int recuperer_place_joueur (classement cls, joueur joueur) {
     return place;
 }
 
-void definir_place_joueur (classement * classement, joueur joueur_, int place) {
-    int i;
+void nouveau_joueur_classement (classement * classement, joueur joueur) {
+    /* On place d'abord le joueur en dernier du classement */
+    classement->meilleurs[CLASSEMENT_NOMBRE - 1] = joueur;
 
-    for (i = classement->nombre - 1; i > place; i--) {
-        classement->meilleurs[i] = classement->meilleurs[i - 1];
-    }
+    /* Et on trie le classement grâce à la méthode qsort */
+    qsort(classement->meilleurs, CLASSEMENT_NOMBRE, sizeof(joueur), comparer_joueur_classement);
 
-    classement->meilleurs[place] = joueur_;
-
-    if (classement->nombre < 10) {
+    if (classement->nombre < CLASSEMENT_NOMBRE) {
         classement->nombre++;
     }
+}
+
+int comparer_joueur_classement(void const *a, void const *b) {
+    joueur const *ja = a;
+    joueur const *jb = b;
+
+    return ja->score == 0 ? 1 : (jb->score == 0 ? -1 : ja->score - jb->score);
 }
 
 classement charger_classement (labyrinthe laby) {
@@ -65,10 +74,21 @@ classement charger_classement (labyrinthe laby) {
         fread(&cls.meilleurs, sizeof(joueur), 10, fichier);
         fclose(fichier);
     } else {
-        cls.nombre = 0;
+        initialiser_classement(&cls);
     }
 
     return cls; 
+}
+
+void initialiser_classement (classement * cls) {
+    int i;
+    
+    cls->nombre = 0;
+
+    for (i = 0; i < CLASSEMENT_NOMBRE; i++) {
+        strcpy(cls->meilleurs[i].nom, "");
+        cls->meilleurs[i].score = 0;
+    }
 }
 
 void sauvegarder_classement (classement cls) {

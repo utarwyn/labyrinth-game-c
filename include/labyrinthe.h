@@ -15,8 +15,8 @@
 #define ARRIVEE_LIG -2
 #define ARRIVEE_COL -1
 
-#define CHANCE_PIEGE .03
-#define CHANCE_TRESOR .04
+#define CHANCE_PIEGE .04
+#define CHANCE_TRESOR .06
 
 #define SCORE_TRESOR -5
 #define SCORE_PIEGE +4

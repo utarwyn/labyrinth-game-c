@@ -86,7 +86,7 @@ labyrinthe creer_labyrinthe () {
 
 labyrinthe charger_fichier_labyrinthe () {
     labyrinthe laby;
-    char * nom;
+    char nom[50];
 
     DIR *d;
     struct dirent *dir;
@@ -104,7 +104,7 @@ labyrinthe charger_fichier_labyrinthe () {
         closedir(d);
 
         printf("\n  labyrinthe à ouvrir :\n    ");
-        scanf("%ms", &nom);
+        scanf("%s", nom);
         printf("\n");
 
         laby = charger_labyrinthe(nom);
@@ -148,13 +148,13 @@ void jouer_labyrinthe () {
         int place_joueur = recuperer_place_joueur(classement, joueur);
 
         if (place_joueur > -1) {
-            char * nom_joueur;
+            char nom_joueur[50];
             printf("Bravo, vous êtes à la place %d avec %dpts !\n", place_joueur + 1, joueur.score);
             printf("Nom pour sauvegarder le score : ");
-            scanf("%ms", &nom_joueur);
+            scanf("%s", nom_joueur);
             strcpy(joueur.nom, nom_joueur);
 
-            definir_place_joueur(&classement, joueur, place_joueur);
+            nouveau_joueur_classement(&classement, joueur);
             afficher_classement(classement);
             sauvegarder_classement(classement);
         } else {
