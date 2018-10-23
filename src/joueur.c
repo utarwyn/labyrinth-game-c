@@ -34,6 +34,7 @@ void deplacer_joueur (joueur * joueur, labyrinthe laby, char direction) {
                 *case_dest = 0;
             }
 
+            /* TODO: mettre la case courante vide et la case de destination en joueur. */
             inverser(case_courante, case_dest);
 
             joueur->score += SCORE_DEPLACEMENT;

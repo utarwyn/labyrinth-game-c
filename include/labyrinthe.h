@@ -22,6 +22,9 @@
 #define SCORE_PIEGE +4
 #define SCORE_DEPLACEMENT +1
 
+#define FACILE 1
+#define DIFFICILE 2
+
 #define CHEMIN_LABYS "labys/"
 
 /**
@@ -34,6 +37,7 @@ typedef struct {
     char nom[50];
     int largeur;
     int hauteur;
+    int difficulte;
     int ** tableau;
 
 } labyrinthe;
@@ -65,6 +69,8 @@ void generer_labyrinthe_aleatoire (labyrinthe laby);
  * @param laby Labyrinthe où générer les bonus/malus.
  **/
 void generer_bonus_malus (labyrinthe laby);
+
+void rendre_difficile (labyrinthe laby);
 
 /**
  * Remplace la valeur d'une section (plusieurs cases)

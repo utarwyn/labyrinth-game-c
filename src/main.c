@@ -52,19 +52,31 @@ labyrinthe creer_labyrinthe () {
     scanf("%d", &laby.largeur);
     printf("  hauteur (impair, > 3) : ");
     scanf("%d", &laby.hauteur);
+    printf("  difficulté (%d: facile, %d: difficile) : ", FACILE, DIFFICILE);
+    scanf("%d", &laby.difficulte);
 
     if (laby.largeur > 3 && laby.largeur % 2 == 1) {
         if (laby.hauteur > 3 && laby.hauteur % 2 == 1) {
-            laby.tableau = creer_tableau_2d(laby.largeur, laby.hauteur);
+            if (laby.difficulte == FACILE || laby.difficulte == DIFFICILE) {
+                laby.tableau = creer_tableau_2d(laby.largeur, laby.hauteur);
     
-            creer_structure_labyrinthe(laby);
-            generer_labyrinthe_aleatoire(laby);
-            generer_bonus_malus(laby);
-            sauvegarder_labyrinthe(laby);
+                creer_structure_labyrinthe(laby);
+                generer_labyrinthe_aleatoire(laby);
+                generer_bonus_malus(laby);
 
-            printf("\n  > Labyrinthe généré avec succès dans %s.cfg\n", laby.nom);
-            
-            return laby;
+                if (laby.difficulte == DIFFICILE) {
+                    rendre_difficile(laby);
+                }
+
+                sauvegarder_labyrinthe(laby);
+
+                printf("\n  > Labyrinthe généré avec succès dans %s.cfg\n", laby.nom);
+                
+                return laby;
+            } else {
+                laby.hauteur = 0;
+                printf("  > Vous devez choisir un niveau de difficulté valide.\n");
+            }
         } else {
             laby.hauteur = 0;
             printf("  > Vous devez sélectionner une hauteur impaire plus grande que 3.\n");

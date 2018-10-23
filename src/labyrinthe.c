@@ -91,6 +91,27 @@ void generer_bonus_malus (labyrinthe laby) {
     }
 }
 
+void rendre_difficile (labyrinthe laby) {
+    int nb_murs_a_enlever = (laby.largeur + laby.hauteur) / 4;
+    int ligne, colonne;
+
+    while (nb_murs_a_enlever > 0) {
+        ligne = nombre_aleatoire(1, laby.hauteur - 2);
+        colonne = nombre_aleatoire(1, laby.largeur - 2);
+
+        if (laby.tableau[ligne][colonne] == MUR &&
+            ((laby.tableau[ligne - 1][colonne] == MUR && laby.tableau[ligne + 1][colonne] == MUR &&
+                laby.tableau[ligne][colonne - 1] >= 0 && laby.tableau[ligne][colonne + 1] > 0)
+            || (laby.tableau[ligne][colonne - 1] == MUR && laby.tableau[ligne][colonne + 1] == MUR &&
+                laby.tableau[ligne - 1][colonne] >= 0 && laby.tableau[ligne + 1][colonne] > 0))) {
+
+            laby.tableau[ligne][colonne] = 0;
+            nb_murs_a_enlever--;
+
+        }
+    }
+}
+
 void remplacer_valeur_recursif (int ** tableau, int ligne, int colonne, int valeur, int valeur_a_remplacer) {
     tableau[ligne][colonne] = valeur_a_remplacer;
 
@@ -120,6 +141,7 @@ void sauvegarder_labyrinthe (labyrinthe laby) {
     /* Ecriture de la largeur et de la hauteur du labyrinthe */
     fwrite(&laby.largeur, sizeof(int), 1, fichier);
     fwrite(&laby.hauteur, sizeof(int), 1, fichier);
+    fwrite(&laby.difficulte, sizeof(int), 1, fichier);
 
     /* Ecriture des cases du labyrinthe dans le fichier */
     int lig, col;
@@ -158,6 +180,7 @@ labyrinthe charger_labyrinthe (char * nom) {
 
     fread(&laby.largeur, sizeof(int), 1, fichier);
     fread(&laby.hauteur, sizeof(int), 1, fichier);
+    fread(&laby.difficulte, sizeof(int), 1, fichier);
 
     int lig, col;
     char element;
