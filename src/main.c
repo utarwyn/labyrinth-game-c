@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <dirent.h>
-#include <assert.h>
-#include <string.h>
-
-#include "classement.h"
 #include "main.h"
-#include "utils.h"
 
 labyrinthe laby;
 
