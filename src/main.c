@@ -147,6 +147,8 @@ void jouer_labyrinthe () {
             deplacer_joueur(&joueur, laby, dir);
             deplacer_monstres(monstres, laby);
 
+            joueur.score += tester_penalites(monstres, laby, &joueur);
+
         } while (joueur_est_arrive(joueur, laby) != 1);
 
         afficher_labyrinthe(laby);

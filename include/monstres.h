@@ -7,7 +7,7 @@ typedef struct {
     char type;
 
     void (* deplacer)();
-    void (* zone_deplacement)();
+    int (* penalite)();
 
 } monstre ;
 
@@ -19,6 +19,8 @@ void deplacer_archer (monstre * monstre, labyrinthe laby);
 
 void deplacer_fantome (monstre * monstre, labyrinthe laby);
 
-void zone_deplacement_archer (monstre monstre, labyrinthe laby);
+int tester_penalites (monstre * monstres, labyrinthe laby, joueur * joueur);
 
-void zone_deplacement_fantome (monstre monstre, labyrinthe laby);
+int penalite_archer (monstre monstre, joueur * joueur);
+
+int penalite_fantome (monstre monstre, joueur * joueur);

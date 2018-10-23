@@ -20,11 +20,13 @@
 #define CHANCE_PIEGE .03
 #define CHANCE_TRESOR .05
 #define CHANCE_ARCHER .02
-#define CHANCE_FANTOME .05
+#define CHANCE_FANTOME .03
 
 #define SCORE_TRESOR -5
 #define SCORE_PIEGE +4
 #define SCORE_DEPLACEMENT +1
+#define SCORE_FANTOME +2
+#define SCORE_ARCHER +5
 
 #define FACILE 1
 #define DIFFICILE 2
