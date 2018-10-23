@@ -9,6 +9,8 @@
 #define JOUEUR -2
 #define TRESOR -3
 #define PIEGE -4
+#define ARCHER -5
+#define FANTOME -6
 
 #define DEPART_LIG 1
 #define DEPART_COL 0
@@ -17,6 +19,8 @@
 
 #define CHANCE_PIEGE .03
 #define CHANCE_TRESOR .05
+#define CHANCE_ARCHER .02
+#define CHANCE_FANTOME .05
 
 #define SCORE_TRESOR -5
 #define SCORE_PIEGE +4
@@ -37,7 +41,10 @@ typedef struct {
     char nom[50];
     int largeur;
     int hauteur;
+
     int difficulte;
+    int nb_monstres;
+    
     int ** tableau;
 
 } labyrinthe;

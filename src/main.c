@@ -131,8 +131,10 @@ void jouer_labyrinthe () {
         
         joueur joueur;
         classement classement;
+        monstre * monstres;
 
         preparer_joueur(&joueur, laby);
+        monstres = initialiser_monstres(&laby);
 
         do {
 
@@ -143,6 +145,7 @@ void jouer_labyrinthe () {
             scanf(" %c", &dir);
 
             deplacer_joueur(&joueur, laby, dir);
+            deplacer_monstres(monstres, laby);
 
         } while (joueur_est_arrive(joueur, laby) != 1);
 

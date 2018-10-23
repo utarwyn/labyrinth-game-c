@@ -49,3 +49,5 @@ int nombre_aleatoire (int min, int max);
  * @return chaîne finale concaténée.
  **/
 char* concatener(char *s1, char *s2);
+
+void shuffle (int *array, size_t n);

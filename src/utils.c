@@ -46,3 +46,16 @@ char* concatener (char *s1, char *s2) {
     strcat(result, s2);
     return result;
 }
+
+void shuffle (int *array, size_t n) {
+    if (n > 1)  {
+        size_t i;
+        
+        for (i = 0; i < n - 1; i++) {
+          size_t j = i + rand() / (RAND_MAX / (n - i) + 1);
+          int t = array[j];
+          array[j] = array[i];
+          array[i] = t;
+        }
+    }
+}

@@ -107,7 +107,6 @@ void rendre_difficile (labyrinthe laby) {
 
             laby.tableau[ligne][colonne] = 0;
             nb_murs_a_enlever--;
-
         }
     }
 }
@@ -220,6 +219,12 @@ void afficher_labyrinthe (labyrinthe laby) {
                     break;
                 case PIEGE:
                     c = '-';
+                    break;
+                case ARCHER:
+                    c = 'X';
+                    break;
+                case FANTOME:
+                    c = 'F';
                     break;
                 default:
                     c = ' ';
