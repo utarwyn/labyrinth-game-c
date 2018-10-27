@@ -1,3 +1,9 @@
+
+#include <stdio.h>
+#include <dirent.h>
+#include <assert.h>
+#include <string.h>
+
 #include "main.h"
 
 labyrinthe laby;
@@ -132,7 +138,6 @@ void jouer_labyrinthe () {
     if (laby.largeur > 0) {
         
         joueur joueur;
-        classement classement;
         monstre * monstres;
         int dern_lig;
         int dern_col;
@@ -161,35 +166,40 @@ void jouer_labyrinthe () {
         } while (joueur_est_arrive(joueur, laby) != 1);
 
         afficher_labyrinthe(laby);
-
-        /* Gestion des scores après la partie. */
-        classement = charger_classement(laby);
-        int place_joueur = recuperer_place_joueur(classement, joueur);
-
-        if (place_joueur > -1) {
-            char nom_joueur[50];
-            printf("Bravo, vous êtes à la place %d avec %dpts !\n", place_joueur + 1, joueur.score);
-            printf("Nom pour sauvegarder le score : ");
-            
-            /* On nettoie l'entrée de l'utilisateur pour éviter tout bug. */
-            int c;
-            while ( (c = getchar()) != '\n' && c != EOF ) { }
-
-            scanf("%s", nom_joueur);
-            strcpy(joueur.nom, nom_joueur);
-
-            nouveau_joueur_classement(&classement, joueur);
-            afficher_classement(classement);
-            sauvegarder_classement(classement);
-        } else {
-            afficher_classement(classement);
-            printf("Votre score: %d\n", joueur.score);
-        }
-
-        /* Rechargement du labyrinthe en cours */
-        laby = charger_labyrinthe(laby.nom);
+        victoire_joueur(&joueur);
 
     } else {
         printf("   > Aucun labyrinthe n'a été chargé. Annulation.\n");
     }
+}
+
+void victoire_joueur (joueur * joueur) {
+    classement classement;
+
+    /* Gestion des scores après la partie. */
+    classement = charger_classement(laby);
+    int place_joueur = recuperer_place_joueur(classement, *joueur);
+
+    if (place_joueur > -1) {
+        char nom_joueur[50];
+        printf("Bravo, vous êtes à la place %d avec %dpts !\n", place_joueur + 1, joueur->score);
+        printf("Nom pour sauvegarder le score : ");
+        
+        /* On nettoie l'entrée de l'utilisateur pour éviter tout bug. */
+        int c;
+        while ( (c = getchar()) != '\n' && c != EOF ) { }
+
+        scanf("%s", nom_joueur);
+        strcpy(joueur->nom, nom_joueur);
+
+        nouveau_joueur_classement(&classement, *joueur);
+        afficher_classement(classement);
+        sauvegarder_classement(classement);
+    } else {
+        afficher_classement(classement);
+        printf("Votre score: %d\n", joueur->score);
+    }
+
+    /* Rechargement du labyrinthe en cours */
+    laby = charger_labyrinthe(laby.nom);
 }

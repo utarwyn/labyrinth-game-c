@@ -9,9 +9,9 @@ LIB		:= lib
 LIBRARIES	:=
 
 ifeq ($(OS),Windows_NT)
-EXECUTABLE	:= main.exe
+EXECUTABLE	:= labyrinthe.exe
 else
-EXECUTABLE	:= main
+EXECUTABLE	:= labyrinthe
 endif
 
 all: $(BIN)/$(EXECUTABLE)

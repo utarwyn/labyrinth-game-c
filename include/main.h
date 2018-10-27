@@ -1,9 +1,4 @@
 
-#include <stdio.h>
-#include <dirent.h>
-#include <assert.h>
-#include <string.h>
-
 #include "monstres.h"
 #include "utils.h"
 
@@ -40,3 +35,12 @@ labyrinthe charger_fichier_labyrinthe ();
  * Lance une partie sur le labyrinthe actuellement chargé en mémoire.
  **/
 void jouer_labyrinthe ();
+
+/**
+ * Gère la victoire d'un joueur. Enrregistre son score
+ * dans le classement si jamais il est meilleur que
+ * les dix premiers scores déjà enregistrés.
+ * 
+ * @param joueur Joueur qui vient de finir le labyrinthe
+ **/
+void victoire_joueur (joueur * joueur);
