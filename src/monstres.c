@@ -57,7 +57,7 @@ void deplacer_archer (monstre * monstre, labyrinthe laby) {
     dern_lig = -1;
     dern_col = -1;
 
-   for (i_pas = 0; i_pas < nb_pas; i_pas++) {
+    for (i_pas = 0; i_pas < nb_pas; i_pas++) {
         shuffle(directions, 4);
         trouve = 0;
 
@@ -135,14 +135,33 @@ int tester_penalites (monstre * monstres, labyrinthe laby, joueur * joueur) {
 }
 
 int penalite_archer (monstre monstre, joueur * joueur) {
-    /* TODO: compléxifier un peu le système pour que les murs bloquent les flèches de l'archer. */
-    return monstre.ligne == joueur->ligne || monstre.colonne == joueur->colonne ? SCORE_ARCHER : 0;
+    return monstre.ligne == joueur->ligne
+        || monstre.colonne == joueur->colonne ? SCORE_ARCHER : 0;
 }
 
 int penalite_fantome (monstre monstre, joueur * joueur) {
-    /* TODO: si la fantôme se situe juste à côté du joueur, on le pénalise */
     int diff_lig = monstre.ligne - joueur->ligne;
     int diff_col = monstre.colonne - joueur->colonne;
 
-    return diff_lig >= -1 && diff_lig <= 1 && diff_col >= -1 && diff_col <= 1 ? SCORE_FANTOME : 0;
+    return diff_lig >= -1 && diff_lig <= 1
+        && diff_col >= -1 && diff_col <= 1 ? SCORE_FANTOME : 0;
+}
+
+void maj_position_monstre (monstre * monstres, labyrinthe laby,
+                           joueur * joueur, int ligne, int colonne) {
+    monstre * monstre;
+    int i;
+
+    monstre = NULL;
+
+    for (i = 0; i < laby.nb_monstres && monstre == NULL ; i++) {
+        if (monstres[i].ligne == joueur->ligne && monstres[i].colonne == joueur->colonne) {
+            monstre = &monstres[i];
+        }
+    }
+
+    if (monstre != NULL) {
+        monstre->ligne = ligne;
+        monstre->colonne = colonne;
+    }
 }

@@ -19,8 +19,8 @@
 
 #define CHANCE_PIEGE .03
 #define CHANCE_TRESOR .05
-#define CHANCE_ARCHER .02
-#define CHANCE_FANTOME .03
+#define CHANCE_ARCHER .01
+#define CHANCE_FANTOME .02
 
 #define SCORE_TRESOR -5
 #define SCORE_PIEGE +4

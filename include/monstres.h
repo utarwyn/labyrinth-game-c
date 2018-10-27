@@ -24,3 +24,6 @@ int tester_penalites (monstre * monstres, labyrinthe laby, joueur * joueur);
 int penalite_archer (monstre monstre, joueur * joueur);
 
 int penalite_fantome (monstre monstre, joueur * joueur);
+
+void maj_position_monstre (monstre * monstres, labyrinthe laby,
+                           joueur * joueur, int ligne, int colonne);

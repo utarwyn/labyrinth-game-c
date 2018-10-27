@@ -33,8 +33,9 @@ void preparer_joueur (joueur * joueur, labyrinthe laby);
  * @param joueur Pointeur vers le joueur qui se déplace
  * @param laby Labyrinthe où se trouve le joueur
  * @param direction Direction vers laquelle le joueur veut se déplacer
+ * @return 1 si le joueur a été déplacé, zéro sinon.
  **/
-void deplacer_joueur (joueur * joueur, labyrinthe laby, char direction);
+int deplacer_joueur (joueur * joueur, labyrinthe laby, char direction);
 
 /**
  * Vérifie si un joueur se trouve sur la position d'arrivée du labyrinthe ou non.

@@ -144,7 +144,8 @@ void sauvegarder_labyrinthe (labyrinthe laby) {
 
     /* Ecriture des cases du labyrinthe dans le fichier */
     int lig, col;
-    char element;
+    int element;
+    char element_fichier;
 
     for (lig = 0; lig < laby.hauteur; lig++) {
         for (col = 0; col < laby.largeur; col++) {
@@ -153,10 +154,12 @@ void sauvegarder_labyrinthe (labyrinthe laby) {
             /* Si l'élément est une case vide avec une valeur, on la met à zéro
                pour éviter les dépassements de type (ici char).                */
             if (element > 0) {
-                element = 0;
+                element_fichier = 0;
+            } else {
+                element_fichier = element;
             }
 
-            fwrite(&element, sizeof(char), 1, fichier);
+            fwrite(&element_fichier, sizeof(char), 1, fichier);
         }
     }
 

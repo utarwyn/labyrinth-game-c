@@ -5,6 +5,8 @@ labyrinthe laby;
 int main () {
     int choix;
 
+    srand(time(NULL));
+
     do {
         printf("\n############### LABY ###############\n");
         printf("#                                  #\n");
@@ -132,6 +134,8 @@ void jouer_labyrinthe () {
         joueur joueur;
         classement classement;
         monstre * monstres;
+        int dern_lig;
+        int dern_col;
 
         preparer_joueur(&joueur, laby);
         monstres = initialiser_monstres(&laby);
@@ -144,8 +148,13 @@ void jouer_labyrinthe () {
             char dir;
             scanf(" %c", &dir);
 
-            deplacer_joueur(&joueur, laby, dir);
-            deplacer_monstres(monstres, laby);
+            dern_lig = joueur.ligne;
+            dern_col = joueur.colonne;
+
+            if (deplacer_joueur(&joueur, laby, dir) == 1) {
+                maj_position_monstre (monstres, laby, &joueur, dern_lig, dern_col);
+                deplacer_monstres(monstres, laby);
+            }
 
             joueur.score += tester_penalites(monstres, laby, &joueur);
 
