@@ -6,6 +6,10 @@ A simple labyrinth game to learn how to program in C.
 Made during first year of engineering school (programming course).
 </h4>
 
+<p align="center">
+    <img src="https://i.imgur.com/VCkwuDK.png" alt="screenshot">
+</p>
+
 > :warning: This game has been developed and written in French.
 
 ## Some Features
